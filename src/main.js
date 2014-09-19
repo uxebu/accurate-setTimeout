@@ -37,30 +37,45 @@ var start1Time = getMilliSeconds();
 console.log('Converted:', msToTime(start1Time));
 printCurrentTime(elStart1, start1Time);
 
+
+var totalDuration = 5000;
+
 setTimeout(function () {
   var end1Time = getMilliSeconds();
   printCurrentTime(elEnd1, end1Time);
   diff1 = getTimeDifference(start1Time, end1Time);
   printCurrentTime(elDiff1, diff1);
-  clearInterval(secondTimeout);
-}, 4000);
+}, totalDuration);
 
-function recursion(){
-  secondTimeout = setTimeout(function(){
+
+var counter = 1;
+var interval = 100;
+var totalDurationNeeded = 0;
+
+function recursion(timeoutInMilliSeconds) {
+  var startTime = getMilliSeconds();
+  secondTimeout = setTimeout(function () {
     var innerDiv = document.createElement('div');
     output2.appendChild(innerDiv);
     innerDiv.innerHTML = counter + '.' + ' - ' + msToTime(getMilliSeconds());
     counter += 1;
-    recursion();
-  },100);
+    var endTime = getMilliSeconds();
+
+    var actualDuration = getTimeDifference(startTime, endTime);
+    totalDurationNeeded += actualDuration;
+
+    if (totalDurationNeeded >= totalDuration){
+      return;
+    }
+
+    var intendedDuration = timeoutInMilliSeconds;
+    var deviation = getTimeDifference(intendedDuration, actualDuration);
+
+    var correctedTimeoutInMilliSeconds = interval - deviation;
+    console.log('actual duration', actualDuration, 'next duration', correctedTimeoutInMilliSeconds);
+    recursion(correctedTimeoutInMilliSeconds);
+  }, timeoutInMilliSeconds);
 }
 
-var counter = 1;
-
-recursion();
-
-
-
-
-
+recursion(interval);
 
