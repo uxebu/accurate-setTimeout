@@ -12,17 +12,28 @@ function getCurrentTime() {
     seconds = "0" + seconds;
   }
 
-  return hours + ":" + minutes + " " + ":" + seconds + ":" + milliseconds;
+  return {
+    hours: hours,
+    minutes: minutes,
+    seconds: seconds,
+    milliseconds: milliseconds
+  }
 }
 
-var start1 = document.getElementById("start1");
-var end1 = document.getElementById("end1");
+function printCurrentTime(domElement, currentTime) {
+  domElement.innerHTML = currentTime.hours + ":" + currentTime.minutes + " " + ":" + currentTime.seconds + ":" + currentTime.milliseconds;
+}
+
+
+var elStart1 = document.getElementById("start1");
+var elEnd1 = document.getElementById("end1");
 var diff1 = document.getElementById("diff1");
 
 
-start1.innerHTML = getCurrentTime();
+var start1Time = getCurrentTime();
+printCurrentTime(elStart1, start1Time);
 
 setTimeout(function () {
- end1.innerHTML = getCurrentTime();
- console.log('Start', start1);
-}, 60000);
+  var end1Time = getCurrentTime();
+  printCurrentTime(elEnd1, end1Time);
+}, 10000);
