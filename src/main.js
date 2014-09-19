@@ -1,8 +1,8 @@
-function getMilliSeconds() {
+function getMilliseconds() {
   return new Date().getTime();
 }
 
-function msToTime(duration) {
+function millisecondsToTime(duration) {
   var milliseconds = parseInt((duration % 1000))
       , seconds = parseInt((duration / 1000) % 60)
       , minutes = parseInt((duration / (1000 * 60)) % 60)
@@ -21,7 +21,7 @@ function getTimeDifference(startTime, endTime) {
 }
 
 function printCurrentTime(domElement, currentTime) {
-  var output = msToTime(currentTime);
+  var output = millisecondsToTime(currentTime);
   domElement.innerHTML = output;
 }
 
@@ -33,15 +33,15 @@ var secondTimeout;
 
 var output2 = document.getElementById("output2");
 
-var start1Time = getMilliSeconds();
-console.log('Converted:', msToTime(start1Time));
+var start1Time = getMilliseconds();
+console.log('Converted:', millisecondsToTime(start1Time));
 printCurrentTime(elStart1, start1Time);
 
 
 var totalDuration = 5000;
 
 setTimeout(function () {
-  var end1Time = getMilliSeconds();
+  var end1Time = getMilliseconds();
   printCurrentTime(elEnd1, end1Time);
   diff1 = getTimeDifference(start1Time, end1Time);
   printCurrentTime(elDiff1, diff1);
@@ -53,13 +53,13 @@ var interval = 100;
 var totalDurationNeeded = 0;
 
 function recursion(timeoutInMilliSeconds) {
-  var startTime = getMilliSeconds();
+  var startTime = getMilliseconds();
   secondTimeout = setTimeout(function () {
     var innerDiv = document.createElement('div');
     output2.appendChild(innerDiv);
-    innerDiv.innerHTML = counter + '.' + ' - ' + msToTime(getMilliSeconds());
+    innerDiv.innerHTML = counter + '.' + ' - ' + millisecondsToTime(getMilliseconds());
     counter += 1;
-    var endTime = getMilliSeconds();
+    var endTime = getMilliseconds();
 
     var actualDuration = getTimeDifference(startTime, endTime);
     totalDurationNeeded += actualDuration;
