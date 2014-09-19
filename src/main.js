@@ -86,3 +86,32 @@ function recursion(timeoutInMilliSeconds) {
 
 recursion(interval);
 
+function checkIfPrime(num) {
+  var flag = true;
+  for (var i = 2; i <= Math.ceil(num / 2); i++) {
+    if ((num % i) == 0) {
+      flag = false;
+      break;
+    }
+  }
+  return flag;
+}
+
+var primes = [];
+for (var i = 0; i < 2000; i++) {
+  var isPrime = checkIfPrime(i);
+  if (isPrime) {
+    primes.push(i);
+  }
+}
+
+for (var i = 0; i < primes.length; i++) {
+  var divTag = document.createElement("div");
+  divTag.innerHTML = primes[i];
+  primeOutput.appendChild(divTag);
+}
+
+
+
+
+
