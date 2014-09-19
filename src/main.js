@@ -51,17 +51,25 @@ setTimeout(function () {
 var counter = 1;
 var interval = 100;
 var totalDurationNeeded = 0;
+var lastWalkThrough = 0;
 
 function recursion(timeoutInMilliSeconds) {
   var startTime = getMilliseconds();
   secondTimeout = setTimeout(function () {
     var innerDiv = document.createElement('div');
     output2.appendChild(innerDiv);
-    innerDiv.innerHTML = counter + '.' + ' - ' + millisecondsToTime(getMilliseconds());
+
+    var currentTime = getMilliseconds();
+    var difference = currentTime - lastWalkThrough - 100;
+
+    innerDiv.innerHTML = counter + '.' + ' - ' + millisecondsToTime(currentTime) + '        Difference:' + millisecondsToTime(difference);
+
+    lastWalkThrough = currentTime;
     counter += 1;
     var endTime = getMilliseconds();
 
     var actualDuration = getTimeDifference(startTime, endTime);
+
     totalDurationNeeded += actualDuration;
 
     if (totalDurationNeeded >= totalDuration){
@@ -70,7 +78,6 @@ function recursion(timeoutInMilliSeconds) {
 
     var intendedDuration = timeoutInMilliSeconds;
     var deviation = getTimeDifference(intendedDuration, actualDuration);
-
     var correctedTimeoutInMilliSeconds = interval - deviation;
     console.log('actual duration', actualDuration, 'next duration', correctedTimeoutInMilliSeconds);
     recursion(correctedTimeoutInMilliSeconds);
