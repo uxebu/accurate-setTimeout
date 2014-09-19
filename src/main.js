@@ -29,6 +29,7 @@ var elStart1 = document.getElementById("start1");
 var elEnd1 = document.getElementById("end1");
 var elDiff1 = document.getElementById("diff1");
 var diff1;
+var secondTimeout;
 
 var output2 = document.getElementById("output2");
 
@@ -44,16 +45,19 @@ setTimeout(function () {
   clearInterval(secondTimeout);
 }, 4000);
 
+function recursion(){
+  secondTimeout = setTimeout(function(){
+    var innerDiv = document.createElement('div');
+    output2.appendChild(innerDiv);
+    innerDiv.innerHTML = counter + '.' + ' - ' + msToTime(getMilliSeconds());
+    counter += 1;
+    recursion();
+  },100);
+}
+
 var counter = 1;
 
-var secondTimeout = setInterval(function () {
-  var innerDiv = document.createElement('div');
-  output2.appendChild(innerDiv);
-  innerDiv.innerHTML = counter + '.' + ' - ' + msToTime(getMilliSeconds());
-  counter += 1;
-  secondTimeout;
-}, 100);
-
+recursion();
 
 
 
