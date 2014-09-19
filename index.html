@@ -3,21 +3,42 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
+    <link rel="stylesheet" type="text/css" href="src/main.css">
 </head>
 <body>
-<div id="output1">
+
+<div class="output" id="output1">
+    <h2>Timer 60 Sekunden</h2>
     Start:
-    <div id="start1">
-    </div>
+    <div id="start1"></div>
     End:
-    <div id="end1">
-    </div>
+    <div id="end1"></div>
     Diff:
-    <div id="diff1">
-    </div>
-
-
+    <div id="diff1"></div>
 </div>
+
+<div class="output" id="output2">
+    <h2>Timer 100ms</h2>
+
+    <div>
+        <input type="checkbox" id="output2Checkbox" name="output2Checkbox"/>
+        <label for="output2Checkbox">
+            <nobr>100ms</nobr>
+        </label>
+    </div>
+</div>
+<div style="clear: both;"></div>
+
+<div class="output" id="primeOutput">
+    <h2>Prime</h2>
+    <div>
+        <input type="checkbox" id="prime" name="output2Checkbox"/>
+        <label for="prime">
+            <nobr>Priem</nobr>
+        </label>
+    </div>
+</div>
+
 <script src="src/main.js"></script>
 </body>
 </html>
